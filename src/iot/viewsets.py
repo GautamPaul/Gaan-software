@@ -4,6 +4,7 @@ from .serializers import IOTEventSerializer
 from .filters import IOTEventFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from django.http import JsonResponse
+from django.db.models import Max, Min, Avg
 
 
 class IOTEventsViewSet(ModelViewSet):
@@ -20,5 +21,11 @@ class IOTDeviceSummary(ViewSet):
         print(from_date)
         print(to_date)
         events = IOTEvent.objects.filter(device=device)
-        print(events)
-        return JsonResponse({"test": "value"})
+        if from_date:
+            events = events.filter(time__gte=from_date)
+        if to_date:
+            events = events.filter(time__lte=to_date)
+        max = events.aggregate(Max("value"))
+        min = events.aggregate(Min("value"))
+        avg = events.aggregate(Avg("value"))
+        return JsonResponse({"max": max.get("value__max"), "min": min.get("value__min"), "avg": avg.get("value__avg")})
