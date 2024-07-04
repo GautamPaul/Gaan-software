@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    {% if iot_events %}
+        <table>
+            <tr>
+                <th>Device</th>
+                <th>Event Time</th>
+                <th>Value</th>
+            </tr>
+        {% for iot_event in iot_events %}
+            <tr>
+                <td>{{iot_event.device}}</td>
+                <td>{{iot_event.time}}</td>
+                <td>{{iot_event.value}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>
