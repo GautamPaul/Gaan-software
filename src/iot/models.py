@@ -9,3 +9,6 @@ class IOTEvent(models.Model):
 
     class Meta:
         verbose_name = "IOT Event"          # this is used to override model name, to display in admin panel
+
+    def __str__(self):
+        return f"{self.device}'s event at {self.time}"

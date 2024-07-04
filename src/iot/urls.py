@@ -1,5 +1,6 @@
 from django.urls import path
+from .viewsets import IOTEventsViewSet
 
 urlpatterns = [
-    path('/', ),
+    path('', IOTEventsViewSet.as_view({'get': 'list'})),
 ]

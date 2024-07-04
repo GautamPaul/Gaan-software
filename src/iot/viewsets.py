@@ -3,6 +3,6 @@ from .models import IOTEvent
 from .serializers import IOTEventSerializer
 
 
-class IOTEventsView(ModelViewSet):
-    queryset = IOTEvent.objets.all()
+class IOTEventsViewSet(ModelViewSet):
+    queryset = IOTEvent.objects.all()
     serializer_class = IOTEventSerializer
