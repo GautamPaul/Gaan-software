@@ -9,3 +9,7 @@ class HomeView(View):
         response = requests.get("http://127.0.0.1:8000/iot/")
         iot_events = response.json().get("results")
         return render(request, "home.html", {"iot_events": iot_events})
+
+class FilterView(View):
+    def get(self, request):
+        return render(request, "filter.html")
