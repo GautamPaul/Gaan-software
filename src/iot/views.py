@@ -10,6 +10,10 @@ class HomeView(View):
         iot_events = response.json().get("results")
         return render(request, "home.html", {"iot_events": iot_events})
 
-class FilterView(View):
+class QueryView(View):
     def get(self, request):
         return render(request, "filter.html")
+
+class SummaryView(View):
+    def get(self, request):
+        return render(request, "summary.html")
