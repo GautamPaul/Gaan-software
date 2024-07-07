@@ -7,4 +7,21 @@ Filter IOT Events
 
 {% block 'body' %}
 Filter by device and date range
+<div class="container w-25">
+    <form>
+        <div class="mb-3">
+            <label for="device" class="form-label">Device</label>
+            <input type="text" class="form-control" id="device">
+        </div>
+        <div class="mb-3">
+            <label for="from" class="form-label">From</label>
+            <input type="date" class="form-control" id="device">
+        </div>
+        <div class="mb-3">
+            <label for="to" class="form-label">To</label>
+            <input type="date" class="form-control" id="to">
+        </div>
+        <button type="submit" class="btn btn-primary">Query</button>
+    </form>
+</div>
 {% endblock %}
