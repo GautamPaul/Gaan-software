@@ -9,19 +9,59 @@ Filter IOT Events
 Filter by device and date range
 <div class="container w-25">
     <form>
+        <!-- {% csrf_token %} -->
         <div class="mb-3">
             <label for="device" class="form-label">Device</label>
             <input type="text" class="form-control" id="device">
         </div>
         <div class="mb-3">
-            <label for="from" class="form-label">From</label>
-            <input type="date" class="form-control" id="device">
+            <label for="from_date" class="form-label">From</label>
+            <input type="date" class="form-control" id="from_date">
         </div>
         <div class="mb-3">
-            <label for="to" class="form-label">To</label>
-            <input type="date" class="form-control" id="to">
+            <label for="to_date" class="form-label">To</label>
+            <input type="date" class="form-control" id="to_date">
         </div>
-        <button type="submit" class="btn btn-primary">Query</button>
+        <!-- <input type="submit" onclick="query()"> -->
+        <button class="btn btn-primary" onclick="query()" type="submit">Query</button>
     </form>
+
 </div>
+{% if iot_events %}
+    <div class="row justify-content-center">
+        <div class="col-auto">
+        <h1 class="text-center">List of IOT Events</h1>
+        <table class="table table-bordered table-sm w-auto">
+            <tr>
+                <th>Device</th>
+                <th>Event Time</th>
+                <th>Value</th>
+            </tr>
+        {% for iot_event in iot_events %}
+            <tr>
+                <td>{{iot_event.device}}</td>
+                <td>{{iot_event.time}}</td>
+                <td>{{iot_event.value}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+    </div>
+{% endif %}
+
+<script>
+    function query() {
+        let device=document.getElementById("device").value;
+        let from=document.getElementById("from_date").value;
+        let to=document.getElementById("to_date").value;
+        get_url = "http://127.0.0.1:8000/iot/?device="+device+"&from="+from+"&to="+to;
+        location.href = "http://127.0.0.1:8000/iot/query/?device=temperature";
+        // alert(get_url);
+        // console.log(get_url)
+        // fetch(get_url).then(response => {
+        //     console.log(response.json());
+        // });
+        console.log("after fetch")
+    }
+</script>
 {% endblock %}
